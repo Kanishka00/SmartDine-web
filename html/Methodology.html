@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>SmartDine</title>
+
+  <link rel="stylesheet" href="../assets/css/maicons.css">
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+  <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+
+  <link rel="stylesheet" href="../assets/css/theme.css">
+
+</head>
+<body>
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
+      <div class="container">
+        <a href="#" class="navbar-brand">Smart<span class="text-primary">Dine.</span></a>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#Domain">Domain</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#Milestones">Milestones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#Documents">Documents</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#Presentations"> Presentations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#About"> About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#Contact"> Contact us</a>
+              </li>
+            
+            </ul>
+          </div>
+
+      </div>
+    </nav>
+
+    <div class="container">
+        <span class="subhead">Methodology</span>
+        <div class="divider"></div>
+        <div class="row align-items-center reverse ">
+            <p class="text-lg text-grey mb-5" style="text-align: justify;">
+                The SmartDine web-based comprehensive system is designed to enhance customer satisfaction and optimize business operations by addressing six key areas within a restaurant context. By identifying critical areas that require attention to improve the dining experience and boost sales, the system provides multi-level solutions to manage these challenges, whether in near real-time or for future planning.
+                Components A-D of the study aimed to assess customer satisfaction by analyzing customer engagement and behavior during their dining experience using video-based techniques. The approach involved processing frames from the restaurant’s CCTV footage with the YOLOv8n (You Only Look Once version 8n) object detection algorithm.
+                A comprehensive dataset comprising CCTV images was utilized to train and evaluate the SmartDine system. The dataset consists of 50,000 images captured from various angles and under different lighting conditions within the restaurant environment. These images include diverse scenarios featuring customers, waiters, managers, tables, chairs, and food plates to ensure robust object detection and classification.
+                The dataset, comprising video footage from various restaurant dining sessions, was split into 80% for training and 20% for testing to ensure effective model training and unbiased evaluation. Data augmentation techniques, such as rotation, scaling, flipping, and brightness adjustments, were applied to the training set to enhance model generalization, simulate different dining environments, and reduce the risk of overfitting. This approach aims to improve the model’s ability to accurately detect food plates, estimate leftover quantities, and analyze customer engagement across diverse settings.
+                A. Customer Turnaround Time Analysis
+                This component of the study involves analyzing customer turnaround time by processing video footage captured by the restaurant’s CCTV cameras. The analysis is aimed at understanding the efficiency of various stages of customer service, from seating to bill payment. The following steps outline the methodology employed:
+                This model was specifically trained to identify key customer interactions, such as seating, ordering, food arrival, and bill payment. Each detected event was timestamped to facilitate the calculation of the time intervals between these events.
+                The time from when a customer is seated to when they place their order is calculated by detecting the moment the customer is seated and the moment the order is taken, using object detection. The time from when the order is placed to when the food arrives at the table is measured by detecting when the food was served to the customer. The time from when the customer requests the bill to when the bill is delivered is determined by detecting the events of bill request and bill delivery.
+                The total dining time was calculated by aggregating the intervals between the initial seating, order placement, food arrival, and bill payment. This metric provides a comprehensive view of the overall efficiency of the dining experience, highlighting areas where service speed can be improved.
+                B. Staff-Customer Interaction Analysis
+                In addition to the above intervals, to measure customer satisfaction, the analysis included staff-customer interactions, such as the distribution of menus and check-ins by staff. These interactions were also timestamped and analyzed to assess their impact on the overall dining experience.
+                The comprehensive video-based analysis enabled an accurate assessment of customer turnaround time, providing valuable insights into service efficiency and areas for potential improvement in the restaurant’s operations.
+                C. Food Leftover Analysis
+                The dataset used for this component consists of video footage from various restaurant dining sessions. The primary focus is on detecting food plates and estimating leftover food parameters over time. Data preprocessing is carried out to prepare the video frames for analysis. The frames are then resized to a consistent resolution suitable for the YOLOv8 model. Additionally, each frame’s pixel values are normalized to improve the accuracy of the object detection process.
+                The YOLOv8 model is utilized for real-time object detection of food plates in video frames. YOLOv8 divides each video frame into a grid and predicts bounding boxes for objects within these grids. This approach allows the model to quickly and accurately identify the presence and location of food plates by marking them with bounding boxes, which are then designated as regions of interest (ROI) for subsequent analysis. The model’s ability to detect whether a plate is empty or contains food is crucial for evaluating food consumption. The estimate food area function calculates the remaining food area within the detected plate. After the plate is identified, OpenCV extracts its region from the video frame. The extracted ROI is converted to grayscale and subjected to thresholding techniques to differentiate between the plate and the food. Non-zero pixels in the thresholded image are counted to estimate the remaining food area. The food area is tracked across successive frames to monitor changes over time.
+                The dataset is split into training, validation set, and test set with a ratio of 80:10:10. The YOLOv8 model is pre-trained on a large-scale dataset and fine-tuned with the specific restaurant video data. Training involves optimizing the model’s weights to minimize the loss function, which combines localization loss (accuracy of bounding box predictions) and classification loss (accuracy of object detection). The Adam optimizer with a learning rate of 0.0001 is used for model training. During validation, the model’s performance is evaluated using precision, recall, and F1-score metrics to ensure accurate detection of plates and food areas.
+                D. Customer Engagement Analysis
+                The dataset consists of video recordings capturing customer interactions at dining tables, focusing on the activities of eating, using a phone, and looking for assistance. The customer engagement analysis involved detecting and timing these specific behaviors to assess their impact on customer satisfaction. For instance, prolonged eating was linked to meal enjoyment, while phone usage and looking around were considered potential signs of disengagement or a need for assistance. The duration of each activity was calculated by recording the start and end times, providing a quantitative measure of customer engagement during the dining experience.
+                The YOLOv8 model is employed to detect specific customer actions, such as eating or phone usage, by analyzing movement patterns and positions in the video frames. The model outputs bounding boxes around detected activities, which are then used to log engagement events. The calculate engagement durations method captures the start and end times of each detected activity, computing the duration by subtracting the start time from the end time. This comprehensive video-based methodology provided a detailed and objective assessment of customer satisfaction by combining food leftover detection and customer behavior analysis.
+                Components E-F of the study aimed to optimize the operational efficiency of restaurant management.
+                E. Table Turnover Prediction
+                To evaluate the table turnover rate, a video-based analysis was conducted using frames extracted from the restaurant’s CCTV footage. The analysis leveraged the YOLOv8n object detection algorithm to identify key events related to table occupancy and vacancy. The following steps outline the methodology employed.
+                After forecasting, the Apriori algorithm is applied to identify frequent item sets and generate association rules, leading to the creation of optimal menu item bundles. These bundles are designed to maximize revenue by promoting items that are often purchased together. The bundles are ranked using metrics such as support, confidence, and lift, and the top-performing bundles are selected for implementation. The dataset includes historical sales and transaction details, preprocessed to handle missing values and normalized for analysis. Lag transforms and rolling statistics are applied to capture trends and seasonality. The models are trained and evaluated on validation sets to ensure  accuracy.
+                The results, including sales forecasts, labor predictions, and menu bundles, are integrated into the restaurant’s database. This allows for dynamic adjustments in staffing, inventory, and promotional strategies, enhancing operational  efficiency and revenue generation.
+                a) Detection of Table Vacating and Occupancy Events: The analysis began by processing each frame of the video to detect when a table was vacated and subsequently when it was occupied again. The YOLOv8n model was trained to recognize these specific events. When a table was detected as vacated, a timestamp was recorded, marking the time when the table became available for the next customer. Similarly, when a table was detected as occupied, another timestamp was recorded, indicating the time when the table was taken by new customers.
+                
+                b) Calculation of Table Turnover: The table turnover measures the time a party occupies a table over a specific period. It is calculated by dividing the number of customers served by the number of tables, where the number of tables is always fixed.
+                
+                Table Turnover Rate
+                =
+                Number of served customers
+                Number of tables
+                Table Turnover Rate= 
+                Number of tables
+                Number of served customers
+                ​
+                 
+                The turnover rate is a crucial metric that reflects the efficiency of table management in a restaurant. This metric provides insights into how quickly the restaurant can reset and reoccupy tables, directly affecting customer wait times and overall dining capacity.
+                
+                c) Table Rearrangement and Cleaning Time: In addition to measuring the turnover rate, the methodology includes calculating table rearrangement and cleaning times. Table rearrangement time represents the period between when a table’s layout is changed and when it is rearranged to its original position for the next customer. Similarly, table cleaning time refers to the time between when customers leave a table after dining and when the table is fully cleaned and ready to serve the next customer.
+                
+                The detection of table vacating, rearrangement, and cleaning events was accomplished using YOLOv8n for object detection and classification. Alongside this, template matching with a sliding window method was used to monitor the table layout and identify uncleaned tables. Template matching compares the current table arrangement with a pre-defined template of a properly arranged or clean table. If there is any deviation in the table’s layout or appearance, it indicates that the table either needs rearrangement or cleaning.
+                
+                The recorded timestamps from these detection events, along with continuous tracking of changes in the table layout, were used to calculate both rearrangement and cleaning times. This approach provided valuable insights into the operational efficiency of the restaurant staff, helping to improve service by preparing tables more efficiently for the next customer.
+                
+                F. Prediction for Dynamic Resource Allocation
+                Dynamic resource allocation in the restaurant industry is essential for efficiently staffing and menu item availability in response to fluctuating customer demand, ensuring optimal operational performance and customer satisfaction.
+                
+                Dynamic resource allocation begins by collecting event data, which is crucial for understanding external factors influencing sales. Events such as holidays and festivals significantly impact customer footfall and purchasing behavior. Web scraping techniques using the Beautiful Soup library gather up-to-date event data from reliable online sources. The collected data is then cleaned and integrated into sales prediction models.
+                
+                Sales forecasting is performed using hierarchical time series models with the Nixtla mlforecast library. The sales data is aggregated based on hierarchies like item type and item name. Models such as LGBMRegressor, RandomForestRegressor, and XGBRegressor are utilized, with advanced features like lag transformations and date features. Predictions are generated and reconciled using hierarchical methods like Bottom-Up and Top-Down, ensuring consistency across different aggregation levels, from individual items to entire menu categories.
+            </p>
+      </div>
+    </div>
+  </header>
+
+
+
+  <footer class="page-footer bg-image" style="background-image: url(../assets/img/world_pattern.svg);">
+    <div class="container">
+      <p class="text-center" id="copyright"> 2024  @ Smart Dine</a></p>
+    </div>
+  </footer>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/js/google-maps.js"></script>
+
+<script src="../assets/vendor/wow/wow.min.js"></script>
+
+<script src="../assets/js/theme.js"></script>
+  
+</body>
+</html>
